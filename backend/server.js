@@ -1,10 +1,12 @@
 const express = require("express");
+const cors = require("cors");
 const { chats } = require("./data/data");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose")
 
 //instance of this express variable
 const app = express();
+
 
 dotenv.config();
 
@@ -13,6 +15,11 @@ const PORT = process.env.PORT || 7000;
 mongoose.connect(process.env.MONGO_URI).then(() => {
     console.log("Connected to MongoDB");
 })
+
+// app.use(cors()); // allows all origins by default
+
+// OR for specific origins
+app.use(cors({ origin: 'http://localhost:5173' }));
 
 app.get("/", (req, res) => {
     res.send("API is running")
