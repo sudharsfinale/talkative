@@ -4,14 +4,12 @@ import LoginPage from "./pages/LoginPage";
 import Chats from "./pages/Chats";
 const App = () => {
   return (
-    <div>
       <Router>
         <Routes>
           <Route path="/" element={<LoginPage />}/>
           <Route path="/chats" element={<Chats />}/>
         </Routes>
       </Router>
-    </div>
   );
 };
 

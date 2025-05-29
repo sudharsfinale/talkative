@@ -12,7 +12,11 @@ dotenv.config();
 
 const PORT = process.env.PORT || 7000;
 
-mongoose.connect(process.env.MONGO_URI).then(() => {
+mongoose.connect(process.env.MONGO_URI).then(async() => {
+    console.log(mongoose.modelNames())
+    const collections = await mongoose.connection.db.listCollections().toArray();
+    collections.forEach(col => console.log(col.name));
+    console.log("Collections:", collections);
     console.log("Connected to MongoDB");
 })
 
@@ -26,6 +30,7 @@ app.get("/", (req, res) => {
 })
 
 app.get("/api/getAllChats", (req, res) => {
+
     res.send(chats)
 })
 
